@@ -7,18 +7,27 @@
 // in a functional, testable program. However, please free to approach the problem
 // differently. There are many paths and approaches that result in a perfectly
 // valid finished product.
-
+const USD = {
+  currencyRate: 1
+}
+const CAD = {
+  currencyRate: 1.25
+}
+const BRL = {
+ currencyRate: 5.5
+}
 // --------------------------------------------------
 // Step 1: Capture user input
 // --------------------------------------------------
 // In this step we will capture the command line  information supplied by the user.
-const amount = process.argv[2];
-const initialCurrency = process.argv[3];
-const targetCurrency = process.argv[4];
+let amount = process.argv[2];
+let initialCurrency = process.argv[3];
+let targetCurrency = process.argv[4];
+let a = amount;
+let b = initialCurrency;
+let c = targetCurrency;
 
-console.log(amount);
-console.log(initialCurrency);
-console.log(targetCurrency);
+
 // We will store each piece of information in a dedicated variable for later use.
 
 
@@ -32,17 +41,18 @@ console.log(targetCurrency);
 // and exit the program.
 if (amount === undefined || amount < 0) {
   console.error('whoops, the amount mst be a number greater than zero. Received ', amount);
+
+   process.exit();
 }
-process.exit(0);
 
 if (initialCurrency === undefined) {
   console.error('whoops, you must provide  value for the initial currency. Received ', initialCurrency);
-  process.exit(0);
+  process.exit();
 }
 
 if (targetCurrency === undefined) {
   console.error('whoops, you must provide value for the target currency. Received ', targetCurrency);
-  process.exit(0);
+  process.exit();
 }
 
 
@@ -57,7 +67,9 @@ if (targetCurrency === undefined) {
 
 // The conversion rates do not have to be accurate, athough this resource contains
 // up-to-date rate information: https://www.xe.com/
-
+//let USD = 1;
+//let CAD = 1.25; // 1USD = 1.25CAD
+//let BRL = 5.5;  // 1USD = 5.5BRL
 
 
 // --------------------------------------------------
@@ -68,7 +80,29 @@ if (targetCurrency === undefined) {
 
 // If the user supplies an invalid initial or target currency, display a meaningful
 // warning message and exit the program.
+const supportedCurrencies = [
+  'USD',
+  'CAD',
+  'BRL',
+];
 
+
+ 
+
+// moeda {
+//   brl = 5.5
+// }
+
+
+if (supportedCurrencies.includes(initialCurrency) === false) {
+  console.error('Whoops, the initial currency is unsupported. The supported currencies are ', supportedCurrencies);
+  process.exit();
+}
+
+if (supportedCurrencies.includes(targetCurrency) === false) {
+  console.error('Whoops, the target currency is unsupported. The supported currencies are ', supportedCurrencies);
+  process.exit();
+}
 
 
 // --------------------------------------------------
@@ -80,6 +114,43 @@ if (targetCurrency === undefined) {
 // Now we will compute the rate, apply it to the amount, and capture the result.
 
 
+if (initialCurrency === 'USD') {
+  initialCurrency = USD.currencyRate;
+    
+}
+if (initialCurrency === 'CAD') {
+  initialCurrency = CAD.currencyRate
+}
+if (initialCurrency === 'BRL') {
+  initialCurrency = BRL.currencyRate
+}
+
+if (targetCurrency === 'USD') {
+  targetCurrency = USD.currencyRate;
+    
+}
+if (targetCurrency === 'CAD') {
+  targetCurrency = CAD.currencyRate
+}
+if (targetCurrency === 'BRL') {
+  targetCurrency = BRL.currencyRate
+}
+
+let convertedAmount;
+
+ convertedAmount = amount*1/initialCurrency*targetCurrency;
+
+
+
+
+
+
+
+// if (initialCurrency === 'USD' && targetCurrency === 'CAD') {
+//   convertedAmount = amount / CAD;
+// } else if (initialCurrency === 'CAD' && targetCurrency === 'USD') {
+//   convertedAmount = amount * CAD;
+// }
 
 // --------------------------------------------------
 // Step 6: Display results
@@ -88,3 +159,4 @@ if (targetCurrency === undefined) {
 
 // This message should also include the original amount and currency information
 // supplied by the user.
+console.log(`${a} ${b} is ${convertedAmount} ${c} `);
