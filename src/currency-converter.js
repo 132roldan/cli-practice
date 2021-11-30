@@ -7,6 +7,9 @@
 // in a functional, testable program. However, please free to approach the problem
 // differently. There are many paths and approaches that result in a perfectly
 // valid finished product.
+
+const { isAmountValid } = require('./validator.functions')
+
 const USD = {
   currencyRate: 1
 }
@@ -39,7 +42,12 @@ let c = targetCurrency;
 
 // If any of the required information is missing, display a meaningful message
 // and exit the program.
-if (amount === undefined || amount < 0) {
+// const isAmountValid = (amount) => {
+//   return amount === undefined || amount <0;
+// }
+
+
+if (isAmountValid(amount)) {
   console.error('whoops, the amount mst be a number greater than zero. Received ', amount);
 
    process.exit();
