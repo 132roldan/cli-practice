@@ -8,7 +8,8 @@
 // differently. There are many paths and approaches that result in a perfectly
 // valid finished product.
 
-const { isAmountValid } = require('./validator.functions')
+const { isAmountInvalid } = require('./validator-functions')
+const { isInitialCurrencyInvalid } = require('./validator-functions')
 
 const USD = {
   currencyRate: 1
@@ -23,6 +24,8 @@ const BRL = {
 // Step 1: Capture user input
 // --------------------------------------------------
 // In this step we will capture the command line  information supplied by the user.
+process.argv[3] = process.argv[3].toUpperCase();
+process.argv[4] = process.argv[4].toUpperCase();
 let amount = process.argv[2];
 let initialCurrency = process.argv[3];
 let targetCurrency = process.argv[4];
@@ -46,14 +49,13 @@ let c = targetCurrency;
 //   return amount === undefined || amount <0;
 // }
 
-
-if (isAmountValid(amount)) {
+if (isAmountInvalid(amount)) {
   console.error('whoops, the amount mst be a number greater than zero. Received ', amount);
 
    process.exit();
 }
 
-if (initialCurrency === undefined) {
+if (isInitialCurrencyInvalid(initialCurrency)) {
   console.error('whoops, you must provide  value for the initial currency. Received ', initialCurrency);
   process.exit();
 }
@@ -168,3 +170,8 @@ let convertedAmount;
 // This message should also include the original amount and currency information
 // supplied by the user.
 console.log(`${a} ${b} is ${convertedAmount} ${c} `);
+
+let cars = ["usd", "cad"];
+// cars = names.map(name => name.toUpperCase());
+
+
