@@ -8,8 +8,9 @@
 // differently. There are many paths and approaches that result in a perfectly
 // valid finished product.
 
-const { isAmountInvalid } = require('./validator-functions')
-const { isInitialCurrencyInvalid } = require('./validator-functions')
+const { isAmountInvalid } = require('./validator-functions');
+const { isInitialCurrencyInvalid } = require('./validator-functions');
+const { isTargetCurrencyInvalid } = require('./validator-functions');
 
 const USD = {
   currencyRate: 1
@@ -60,7 +61,7 @@ if (isInitialCurrencyInvalid(initialCurrency)) {
   process.exit();
 }
 
-if (targetCurrency === undefined) {
+if (isTargetCurrencyInvalid(targetCurrency)) {
   console.error('whoops, you must provide value for the target currency. Received ', targetCurrency);
   process.exit();
 }
