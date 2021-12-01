@@ -31,11 +31,11 @@ if (isTargetCurrencyInvalid(targetCurrency)) {
   process.exit();
 }
 
-//////////////////////////    SUPORTED CURRENCY AND RATE   ///////////////////////////
+//////////////////////////    SUPPORTED CURRENCY AND RATE   ///////////////////////////
 const currency = ["USD", "CAD", "BRL", "TRK", "MXN", "EUR", "GBP", "INR", "CNY"];
 const rate = [1, 1.27, 5.6, 13.4, 21.3, 0.88, 0.75, 74, 94, 6.36];
 
-/////////////////////////      MESSAGE TO UNSUPORTED CURRENCY  //////////////////////////
+/////////////////////////      MESSAGE TO UNSUPPORTED CURRENCY  //////////////////////////
 if (currency.includes(initialCurrency) === false) {
   console.error('Whoops, the initial currency is unsupported. The supported currencies are ', currency);
   process.exit();
@@ -46,7 +46,7 @@ if (currency.includes(targetCurrency) === false) {
   process.exit();
 }
 
-/////////////////////////      CONVERTION CALC     /////////////////////////
+/////////////////////////      CONVERSION CALC     /////////////////////////
 
 let indice = currency.indexOf(initialCurrency);
 const currencyRate = rate[indice];
